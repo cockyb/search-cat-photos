@@ -13,10 +13,6 @@ class ImageInfo {
     this.render();
   }
 
-  closeModal() {
-    this.setState({ visible: false, image: null });
-  }
-
   setState(nextData) {
     this.data = nextData;
     this.render();
@@ -39,9 +35,6 @@ class ImageInfo {
           </div>
         </div>`;
       this.$imageInfo.style.display = "block";
-      this.$imageInfo.querySelector('.close').addEventListener("click", this.closeModal)
-      this.$imageInfo.querySelector('.content-wrapper').addEventListener("click", (e) => { e.stopPropagation() })
-      this.$imageInfo.addEventListener("click", this.closeModal)
     } else {
       this.$imageInfo.style.display = "none";
     }
