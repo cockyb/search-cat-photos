@@ -9,17 +9,18 @@ class ImageInfo {
     $target.appendChild($imageInfo);
 
     this.data = data;
+    this.closeModal = this.closeModal.bind(this)
 
     this.render();
-  }
-
-  closeModal() {
-    this.setState({ visible: false, image: null });
   }
 
   setState(nextData) {
     this.data = nextData;
     this.render();
+  }
+
+  closeModal() {
+    this.setState({ visible: false, image: null });
   }
 
   render() {
