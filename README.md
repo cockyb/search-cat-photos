@@ -28,6 +28,6 @@ build 스크립트를 통해 빌드를 진행합니다. 산출물은 dist 디렉
 ### 테스트
 
 ### 더 알아보기
-- 요구사항에 따라 [문제]()들을 해결해 나가시면 됩니다.
+- 요구사항에 따라 [문제](https://github.com/cockyb/search-cat-photos/blob/master/requirements.md)들을 해결해 나가시면 됩니다.
 - 웹팩에 대한 이해를 위해서 [웹팩 공식문서](https://webpack.js.org/)를 참고해 주세요.
 - 테스팅 라이브러리 [jest](https://jestjs.io/)에 대해 알아보기
