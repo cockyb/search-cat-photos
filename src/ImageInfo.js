@@ -1,13 +1,13 @@
-class ImageInfo {
-  $imageInfo = null;
-  data = null;
+import api from "@/api";
 
+class ImageInfo {
   constructor({ $target, data }) {
     const $imageInfo = document.createElement("div");
     $imageInfo.className = "ImageInfo";
-    this.$imageInfo = $imageInfo;
     $target.appendChild($imageInfo);
 
+    this.$target = $target
+    this.$imageInfo = $imageInfo;
     this.data = data;
     this.closeModal = this.closeModal.bind(this)
 
@@ -15,8 +15,19 @@ class ImageInfo {
   }
 
   setState(nextData) {
-    this.data = nextData;
-    this.render();
+    if (nextData.image !== null) {
+      const { id } = nextData.image;
+      api.fetchCat(id).then(({ data }) => {
+        const { temperament, origin } = data;
+        nextData.image.temperament = temperament;
+        nextData.image.origin = origin;
+        this.data = nextData;
+        this.render();
+      });
+    } else {
+      this.data = nextData;
+      this.render();
+    }
   }
 
   closeModal() {
@@ -26,7 +37,6 @@ class ImageInfo {
   render() {
     if (this.data.visible) {
       const { name, url, temperament, origin } = this.data.image;
-
       this.$imageInfo.innerHTML = `
         <div class="content-wrapper">
           <div class="title">
