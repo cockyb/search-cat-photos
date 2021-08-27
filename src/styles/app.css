@@ -60,6 +60,13 @@ body * {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.HiddenInput{
+  opacity: 0;
+  position: fixed;
+  width: 0;
+  height: 0;
+}
+
 .ImageInfo .title {
   display: flex;
   justify-content: space-between;
@@ -118,6 +125,12 @@ body * {
   }
   to {
       opacity: 1;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .content-wrapper {
+    width: 94%;
   }
 }
 /* dark mode 처리

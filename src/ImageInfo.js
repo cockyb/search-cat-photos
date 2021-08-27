@@ -6,8 +6,13 @@ class ImageInfo {
     $imageInfo.className = "ImageInfo";
     $target.appendChild($imageInfo);
 
+    const $hiddenInput = document.createElement("input")
+    $hiddenInput.className = "HiddenInput";
+    $target.appendChild($hiddenInput);
+
     this.$target = $target
     this.$imageInfo = $imageInfo;
+    this.$hiddenInput = $hiddenInput;
     this.data = data;
     this.closeModal = this.closeModal.bind(this)
 
@@ -53,6 +58,12 @@ class ImageInfo {
       this.$imageInfo.querySelector('.close').addEventListener("click", this.closeModal)
       this.$imageInfo.querySelector('.content-wrapper').addEventListener("click", (e) => { e.stopPropagation() })
       this.$imageInfo.addEventListener("click", this.closeModal)
+
+      this.$hiddenInput.addEventListener('keyup', e => {
+        if (e.keyCode === 27) (this.closeModal())
+      })
+      this.$hiddenInput.focus()
+
     } else {
       this.$imageInfo.style.display = "none";
     }
