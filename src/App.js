@@ -1,9 +1,4 @@
-
-import ImageInfo from '@/ImageInfo'
-import SearchInput from '@/SearchInput'
-import SearchResult from '@/SearchResult'
-
-import api from '@/api'
+console.log("app is running!");
 
 class App {
   $target = null;
@@ -15,10 +10,7 @@ class App {
     this.searchInput = new SearchInput({
       $target,
       onSearch: keyword => {
-        this.loading = true
-        api.fetchCats(keyword).then(({ data }) => {
-          this.setState(data)
-        });
+        api.fetchCats(keyword).then(({ data }) => this.setState(data));
       }
     });
 
@@ -48,5 +40,3 @@ class App {
     this.searchResult.setState(nextData);
   }
 }
-
-export default App

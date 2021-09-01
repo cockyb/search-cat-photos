@@ -7,18 +7,14 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "build": "webpack --mode=production",
-    "dev": "webpack-dev-server --mode=development"
+    "test": "jest --config=jest.config.js",
+    "start": "http-server . -c-1"
   },
   "devDependencies": {
-    "@babel/core": "^7.15.0",
-    "@babel/preset-env": "^7.15.0",
-    "babel-loader": "^8.2.2",
-    "css-loader": "^6.2.0",
-    "file-loader": "^6.2.0",
-    "style-loader": "^3.2.1",
-    "webpack": "^5.51.1",
-    "webpack-cli": "^4.8.0",
-    "webpack-dev-server": "^4.0.0"
+    "@babel/core": "^7.8.3",
+    "@babel/preset-env": "^7.8.3",
+    "babel-jest": "^25.1.0",
+    "http-server": "^0.12.0",
+    "jest": "^24.9.0"
   }
 }
