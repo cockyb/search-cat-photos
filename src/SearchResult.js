@@ -23,20 +23,25 @@ class SearchResult {
   }
 
   render() {
-
+    console.log(this.data);
     this.$searchResult.innerHTML = this.loading ?
       `<div>
         loading...
       </div>`
       :
-      this.data.map(
-        cat => `
+      this.data.length === 0 ?
+        `<div>
+          검색결과가 없습니다.
+        </div>`
+        :
+        this.data.map(
+          cat => `
           <div class="item">
             <img src=${cat.url} alt=${cat.name} />
           </div>
         `
-      )
-        .join("");
+        )
+          .join("");
 
     this.$searchResult.querySelectorAll(".item").forEach(($item, index) => {
       $item.addEventListener("click", () => {
