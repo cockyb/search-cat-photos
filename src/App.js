@@ -10,13 +10,14 @@ class App {
     this.searchInput = new SearchInput({
       $target,
       onSearch: keyword => {
-        api.fetchCats(keyword).then(({ data }) => this.setState(data));
+        this.setState({ data: [], loading: true })
+        api.fetchCats(keyword).then(({ data }) => this.setState({ data, loading: false }));
       }
     });
 
     this.searchResult = new SearchResult({
       $target,
-      initialData: this.data,
+      initialData: { data: this.data, loading: null },
       onClick: image => {
         this.imageInfo.setState({
           visible: true,
@@ -36,7 +37,7 @@ class App {
 
   setState(nextData) {
     console.log(this);
-    this.data = nextData;
+    this.data = nextData.data;
     this.searchResult.setState(nextData);
   }
 }
