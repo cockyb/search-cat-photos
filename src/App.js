@@ -9,21 +9,30 @@ class App {
     if (window.localStorage.getItem('data') === null) {
       window.localStorage.setItem('data', [])
     } else {
-      console.log(this.data);
       const data = window.localStorage.getItem('data')
       this.data = JSON.parse(data)
     }
 
     this.searchInput = new SearchInput({
       $target,
-      onSearch: keyword => {
+      onSearch: async (keyword) => {
         this.setState({ data: [], loading: true })
-        api.fetchCats(keyword).then(({ data }) => {
-          this.setState({ data, loading: false })
-          window.localStorage.setItem('data', JSON.stringify(data))
-        });
+        const { data } = await api.fetchCats(keyword);
+        this.setState({ data, loading: false })
+        window.localStorage.setItem('data', JSON.stringify(data))
+
       }
     });
+
+    this.randomButton = new RandomButton({
+      $target,
+      onClick: async () => {
+        this.setState({ data: [], loading: true })
+        const { data } = await api.fetchRandomCats()
+        this.setState({ data, loading: false })
+        window.localStorage.setItem('data', JSON.stringify(data))
+      }
+    })
 
     this.searchResult = new SearchResult({
       $target,
@@ -43,6 +52,8 @@ class App {
         image: null
       }
     });
+
+
   }
 
   setState(nextData) {
