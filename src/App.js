@@ -1,26 +1,25 @@
-console.log("app is running!");
-
 class App {
-  $target = null;
-  // data = [];
   constructor($target) {
     this.$target = $target;
-    this.data = [];
+    this.state = {
+      data: [],
+      isLoading: null
+    }
+
     if (window.localStorage.getItem('data') === null) {
       window.localStorage.setItem('data', [])
     } else {
-      const data = window.localStorage.getItem('data')
-      this.data = JSON.parse(data)
+      const localData = window.localStorage.getItem('data')
+      this.state.data = JSON.parse(localData)
     }
 
     this.searchInput = new SearchInput({
       $target,
       onSearch: async (keyword) => {
-        this.setState({ data: [], loading: true })
+        this.setState({ data: [], isLoading: true })
         const { data } = await api.fetchCats(keyword);
-        this.setState({ data, loading: false })
+        this.setState({ data, isLoading: false })
         window.localStorage.setItem('data', JSON.stringify(data))
-
       }
     });
 
@@ -36,7 +35,7 @@ class App {
 
     this.searchResult = new SearchResult({
       $target,
-      initialData: { data: this.data, loading: null },
+      initialState: this.state,
       onClick: image => {
         this.imageInfo.setState({
           visible: true,
@@ -52,13 +51,11 @@ class App {
         image: null
       }
     });
-
-
   }
 
-  setState(nextData) {
-    console.log(this);
-    this.data = nextData.data;
-    this.searchResult.setState(nextData);
+  setState(newState) {
+    console.log(newState);
+    this.state = newState;
+    this.searchResult.setState(newState);
   }
 }

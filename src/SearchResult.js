@@ -1,24 +1,19 @@
 class SearchResult {
-  // $searchResult = null;
-  // data = null;
-  // onClick = null;
-  // loading = null;
-
-  constructor({ $target, initialData, onClick }) {
+  constructor({ $target, initialState, onClick }) {
     this.$searchResult = document.createElement("div");
     this.$searchResult.className = "SearchResult";
-    $target.appendChild(this.$searchResult);
 
-    this.data = initialData.data;
+    this.data = initialState.data;
+    this.loading = initialState.loading
     this.onClick = onClick;
-    this.loading = initialData.loading
 
+    $target.appendChild(this.$searchResult);
     this.render();
   }
 
-  setState(nextData) {
-    this.data = nextData.data;
-    this.loading = nextData.loading
+  setState(newState) {
+    this.data = newState.data;
+    this.loading = newState.loading
     this.render();
   }
 
@@ -28,7 +23,7 @@ class SearchResult {
         loading...
       </div>`
       :
-      this.data.length === 0 ?
+      this.data.length === 0 || this.data === null ?
         `<div>
           검색결과가 없습니다.
         </div>`
